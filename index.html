@@ -3,12 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplo de Página</title>
+    <title>Ejemplo de Página con Chat Anónimo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #chat-box {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+        }
+        #message {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        #send-btn {
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hola, bienvenido a mi página web</h1>
-    <p>Esta es una página simple de prueba.</p>
-    <p>Aquí puedes añadir más contenido, como imágenes, enlaces o cualquier otro tipo de información.</p>
-    <p>Espero que tengas un gran día.</p>
+    <h1>Bienvenido al chat anónimo</h1>
+    <div id="chat-box"></div>
+    
+    <input type="text" id="message" placeholder="Escribe tu mensaje..." />
+    <button id="send-btn">Enviar</button>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const sendButton = document.getElementById('send-btn');
+        const messageInput = document.getElementById('message');
+
+        sendButton.addEventListener('click', () => {
+            const message = messageInput.value.trim();
+
+            if (message !== "") {
+                // Crear un nuevo mensaje
+                const messageElement = document.createElement('p');
+                messageElement.textContent = message;
+                chatBox.appendChild(messageElement);
+
+                // Desplazar la vista al final del chat
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Limpiar el campo de mensaje
+                messageInput.value = "";
+            }
+        });
+
+        // Permitir el envío con la tecla Enter
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    </script>
 </body>
 </html>
